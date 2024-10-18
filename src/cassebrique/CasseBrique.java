@@ -3,6 +3,7 @@ package cassebrique;
 import cassebrique.models.Balle;
 import cassebrique.models.Barre;
 import cassebrique.models.Brique;
+import cassebrique.models.Collision;
 
 import javax.swing.*;
 import java.awt.*;
@@ -102,6 +103,15 @@ public class CasseBrique extends Canvas implements KeyListener {
 
             dessin.dispose();
             this.getBufferStrategy().show();
+
+            for (Balle balle : listeBalle) {
+                balle.deplacer();
+                balle.dessiner(dessin);
+                if (Collision.Col(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre(),
+                        barre.getX(), barre.getY(), barre.getLargeurDefaut(), barre.getHauteurDefaut())) {
+                    balle.setVitesseY(-balle.getVitesseY());}
+            }
+
 
             Thread.sleep(1000 / 60);
         }

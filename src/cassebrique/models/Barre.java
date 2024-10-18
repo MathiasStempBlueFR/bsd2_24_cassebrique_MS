@@ -36,4 +36,12 @@ public class Barre extends Rectangle {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
+
+    public int getLargeurDefaut() {
+        return largeurDefaut;
+    }
+
+    public int getHauteurDefaut() {
+        return hauteurDefaut;
+    }
 }
