@@ -52,9 +52,9 @@ public class CasseBrique extends Canvas implements KeyListener {
     public void lancerUnePartie() throws InterruptedException {
 
         listeBalle = new ArrayList<>();
-        listeBalle.add(new Balle(100,100,3,4));
-        listeBalle.add(new Balle(200,100,2,3));
-        listeBalle.add(new Balle(100,200,1,2));
+        listeBalle.add(new Balle(100,300,3,4));
+        listeBalle.add(new Balle(200,300,2,3));
+        listeBalle.add(new Balle(150,300,1,2));
 
         barre = new Barre(
                 CasseBrique.LARGEUR / 2 - Barre.largeurDefaut / 2,
@@ -97,8 +97,18 @@ public class CasseBrique extends Canvas implements KeyListener {
 
             barre.dessiner(dessin);
 
-            for(Brique brique : listeBrique) {
+            for (int i = 0; i < listeBrique.size(); i++) {
+                Brique brique = listeBrique.get(i);
                 brique.dessiner(dessin);
+                for (Balle balle : listeBalle) {
+                    if (Collision.Col(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre(),
+                            brique.getX(), brique.getY(), brique.getLargeurDefaut(), brique.getHauteurDefaut())) {
+                        balle.setVitesseY(-balle.getVitesseY());
+                        listeBrique.remove(i);
+                        i--;
+                        break;
+                    }
+                }
             }
 
             dessin.dispose();
@@ -109,8 +119,10 @@ public class CasseBrique extends Canvas implements KeyListener {
                 balle.dessiner(dessin);
                 if (Collision.Col(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre(),
                         barre.getX(), barre.getY(), barre.getLargeurDefaut(), barre.getHauteurDefaut())) {
-                    balle.setVitesseY(-balle.getVitesseY());}
+                    balle.setVitesseY(-balle.getVitesseY());
+                }
             }
+
 
 
             Thread.sleep(1000 / 60);

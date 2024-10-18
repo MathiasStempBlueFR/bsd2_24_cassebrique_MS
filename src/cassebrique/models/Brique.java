@@ -24,4 +24,20 @@ public class Brique extends Rectangle {
     public void setResistance(int resistance) {
         this.resistance = resistance;
     }
+
+    public static int getHauteurDefaut() {
+        return hauteurDefaut;
+    }
+
+    public static void setHauteurDefaut(int hauteurDefaut) {
+        Brique.hauteurDefaut = hauteurDefaut;
+    }
+
+    public static int getLargeurDefaut() {
+        return largeurDefaut;
+    }
+
+    public static void setLargeurDefaut(int largeurDefaut) {
+        Brique.largeurDefaut = largeurDefaut;
+    }
 }
