@@ -20,6 +20,9 @@ public class CasseBrique extends Canvas implements KeyListener {
     public static final int LARGEUR = 500;
     public static final int HAUTEUR = 700;
 
+    public boolean toucheDroite = false;
+    public boolean toucheGauche = false;
+
     public CasseBrique() throws InterruptedException {
 
         this.fenetre.setSize(LARGEUR, HAUTEUR);
@@ -84,6 +87,13 @@ public class CasseBrique extends Canvas implements KeyListener {
                 balle.dessiner(dessin);
             }
 
+            if(toucheDroite){
+                barre.deplacementDroite();
+            }
+            if(toucheGauche){
+                barre.deplacementGauche();
+            }
+
             barre.dessiner(dessin);
 
             for(Brique brique : listeBrique) {
@@ -109,17 +119,23 @@ public class CasseBrique extends Canvas implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            barre.deplacementDroite();
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+            toucheDroite = true;
         }
 
-        if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-            barre.deplacementGauche();
+        if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_Q || e.getKeyCode() == KeyEvent.VK_A) {
+            toucheGauche = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+            toucheDroite = false;
+        }
 
+        if(e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_Q || e.getKeyCode() == KeyEvent.VK_A) {
+            toucheGauche = false;
+        }
     }
 }

@@ -3,7 +3,6 @@ package cassebrique.models;
 import java.awt.*;
 
 public class Brique extends Rectangle {
-
     protected int resistance;
     public static int hauteurDefaut = 40;
     public static int largeurDefaut = 70;
