@@ -1,9 +1,6 @@
 package cassebrique;
 
-import cassebrique.models.Balle;
-import cassebrique.models.Barre;
-import cassebrique.models.Brique;
-import cassebrique.models.Collision;
+import cassebrique.models.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +13,7 @@ public class CasseBrique extends Canvas implements KeyListener {
     public JFrame fenetre = new JFrame();
     public ArrayList<Balle> listeBalle = new ArrayList<>();
     public ArrayList<Brique> listeBrique = new ArrayList<>();
+    public ArrayList<Sprite> listeSprite = new ArrayList<>();
     public Barre barre;
 
     public static final int LARGEUR = 500;
@@ -56,6 +54,10 @@ public class CasseBrique extends Canvas implements KeyListener {
         listeBalle.add(new Balle(200,300,2,3));
         listeBalle.add(new Balle(150,300,1,2));
 
+        listeSprite.add(listeBalle.get(0));
+        listeSprite.add(listeBalle.get(1));
+        listeSprite.add(listeBalle.get(2));
+
         barre = new Barre(
                 CasseBrique.LARGEUR / 2 - Barre.largeurDefaut / 2,
                 CasseBrique.HAUTEUR - 100);
@@ -68,6 +70,7 @@ public class CasseBrique extends Canvas implements KeyListener {
                         indexLigne * (Brique.hauteurDefaut + 2),
                         Color.CYAN);
                 listeBrique.add(brique);
+                listeSprite.add(brique);
             }
         }
 
@@ -85,7 +88,10 @@ public class CasseBrique extends Canvas implements KeyListener {
 
             for(Balle balle : listeBalle) {
                 balle.deplacer();
-                balle.dessiner(dessin);
+            }
+
+            for(Sprite sprite : listeSprite) {
+                sprite.dessiner(dessin);
             }
 
             if(toucheDroite){
@@ -105,6 +111,7 @@ public class CasseBrique extends Canvas implements KeyListener {
                             brique.getX(), brique.getY(), brique.getLargeurDefaut(), brique.getHauteurDefaut())) {
                         balle.setVitesseY(-balle.getVitesseY());
                         listeBrique.remove(i);
+                        listeSprite.remove(brique);
                         i--;
                         break;
                     }
@@ -123,7 +130,8 @@ public class CasseBrique extends Canvas implements KeyListener {
                 }
             }
 
-
+            dessin.dispose();
+            this.getBufferStrategy().show();
 
             Thread.sleep(1000 / 60);
         }

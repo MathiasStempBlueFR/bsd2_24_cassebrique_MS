@@ -2,11 +2,13 @@ package cassebrique.models;
 
 import java.awt.*;
 
-public class Rond extends Sprite{
-    private int diametre;
+public class Rond extends Sprite {
 
-    public Rond(int x, int y, Color color, int diametre) {
+    protected int diametre;
 
+    public Rond(int x, int y, int diametre, Color couleur) {
+        super(x, y, couleur);
+        this.diametre = diametre;
     }
 
     public Rond() {
@@ -20,6 +22,4 @@ public class Rond extends Sprite{
         dessin.setColor(couleur);
         dessin.fillOval(x,y,diametre,diametre);
     }
-
 }
-

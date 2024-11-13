@@ -11,6 +11,7 @@ public class Balle extends Rond {
     protected int diametre = 20;
 
     public Balle() {
+        super();
         this.x = this.nombreAleatoire(diametre,CasseBrique.LARGEUR - diametre);
         this.y = this.nombreAleatoire(400,500);
         this.vitesseX = 3;
